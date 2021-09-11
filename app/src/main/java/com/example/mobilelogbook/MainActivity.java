@@ -3,18 +3,20 @@ package com.example.mobilelogbook;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private MaterialRadioButton m_radio_btn_furnished;
     private MaterialRadioButton m_radio_btn_unfurnished;
     private MaterialRadioButton m_radio_btn_part_furnished;
+    private RadioGroup rg_furniture;
+
     int date, month, year, hour, minute;
     int m_date, m_month, m_year, m_hour, m_minute;
     @Override
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         setDropdownListBedrooms();
         dateTimePicker();
         validateInfoSubmit();
+        textChangeWatcher();
         
 
 
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
 
     private void submitInfo(String property, String bedroom, String dateTime, String furniture, String price, String note, String name) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this,R.style.Theme_MaterialComponents_Light_Dialog_Alert);
         builder.setMessage(getString(R.string.message_alert_dialog_txt));
         builder.setCancelable(true);
 
@@ -134,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 rentalInfo.put("bedroom",bedroom);
                 rentalInfo.put("dateTime",dateTime);
                 rentalInfo.put("furnitureType",furniture);
-                rentalInfo.put("monthlyProce",price);
+                rentalInfo.put("monthlyPrice",price);
                 rentalInfo.put("note",note);
                 rentalInfo.put("nameOfReporter",name);
             db.collection("rental").add(rentalInfo).addOnSuccessListener(documentReference -> {
@@ -142,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             });
 
             Toast.makeText(MainActivity.this,getString(R.string.successful_submit_toast_txt),Toast.LENGTH_SHORT).show();
+            clearText();
             dialogInterface.cancel();
         });
         builder.setNegativeButton(getString(R.string.negative_button), (dialogInterface, i) -> dialogInterface.cancel());
@@ -150,9 +156,153 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         alertDialog.show();
     }
 
+    private void clearText() {
+        mauctv_property.setText("");
+        mauctv_bedroom.setText("");
+        tiete_date_time.setText("");
+        tiete_price.setText("");
+        tiete_note.setText("");
+        tiete_name.setText("");
+        rg_furniture.clearCheck();
+
+    }
+
+    private void textChangeWatcher() {
+        mauctv_property.addTextChangedListener(tcw_property);
+        mauctv_bedroom.addTextChangedListener(tcw_bedroom);
+        tiete_date_time.addTextChangedListener(tcw_dateTime);
+        tiete_price.addTextChangedListener(tcw_price);
+        tiete_name.addTextChangedListener(tcw_name);
+    }
+
+    private final TextWatcher tcw_property = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            TextInputLayout layout = findViewById(R.id.til_property);
+            if(editable.length() == 0){
+                layout.setErrorEnabled(true);
+                layout.setError(getString(R.string.validate_information_error));
+                layout.requestFocus();
+            }
+            else{
+                layout.setErrorEnabled(false);
+            }
+        }
+    };
+
+    private final TextWatcher tcw_bedroom = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            TextInputLayout layout = findViewById(R.id.til_bedrooms);
+            if(editable.length() == 0){
+                layout.setErrorEnabled(true);
+                layout.setError(getString(R.string.validate_information_error));
+                layout.requestFocus();
+            }
+            else{
+                layout.setErrorEnabled(false);
+            }
+        }
+    };
+
+    private final TextWatcher tcw_dateTime = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            TextInputLayout layout = findViewById(R.id.til_date_time);
+            if(editable.length() == 0){
+                layout.setErrorEnabled(true);
+                layout.setError(getString(R.string.validate_information_error));
+                layout.requestFocus();
+            }
+            else{
+                layout.setErrorEnabled(false);
+            }
+        }
+    };
+
+    private final TextWatcher tcw_price = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            TextInputLayout layout = findViewById(R.id.til_monthlyPrice);
+            if(editable.length() == 0){
+                layout.setErrorEnabled(true);
+                layout.setError(getString(R.string.validate_information_error));
+                layout.requestFocus();
+            }
+            else{
+                layout.setErrorEnabled(false);
+            }
+        }
+    };
+
+    private final TextWatcher tcw_name = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            TextInputLayout layout = findViewById(R.id.til_name);
+            if(editable.length() == 0){
+                layout.setErrorEnabled(true);
+                layout.setError(getString(R.string.validate_information_error));
+                layout.requestFocus();
+            }
+            else{
+                layout.setErrorEnabled(false);
+            }
+        }
+    };
+
     private String validateFurnitureStatus(){
         String f_status="";
-        if(m_radio_btn_unfurnished.isChecked()){
+        if(m_radio_btn_furnished.isChecked()){
             f_status = getString(R.string.rb_furnished);
         }
         if (m_radio_btn_unfurnished.isChecked()){
@@ -165,6 +315,23 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
 
+
+
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void dateTimePicker() {
+        tiete_date_time.setOnTouchListener((view, motionEvent) -> {
+            Calendar calendar = Calendar.getInstance();
+            date = calendar.get(Calendar.DAY_OF_MONTH);
+            month = calendar.get(Calendar.MONTH);
+            year = calendar.get(Calendar.YEAR);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, MainActivity.this,year, month,date);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
+            return true;
+    });
+}
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         m_year = year;
@@ -177,19 +344,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         timePickerDialog.show();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
         m_hour = i;
         m_minute = i1;
-        String n_min = validateMinute(m_minute);
+        String n_min = validateMinute();
 
         tiete_date_time.setText(m_year+"-" + validateMonth(String.valueOf(m_month)) +"-"+m_date+ " " + m_hour + ":" +n_min);
     }
 
-    private String validateMinute(int minute) {
+    private String validateMinute() {
         String v_min;
         if(m_minute < 10){
-            v_min= "0"+String.valueOf(m_minute);
+            v_min= "0"+ m_minute;
         }else{
             v_min = String.valueOf(m_minute);
         }
@@ -241,22 +409,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         return v_month;
     }
 
-    private void dateTimePicker() {
-        tiete_date_time.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Calendar calendar = Calendar.getInstance();
-                date = calendar.get(Calendar.DAY_OF_MONTH);
-                month = calendar.get(Calendar.MONTH);
-                year = calendar.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, MainActivity.this,year, month,date);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-                datePickerDialog.show();
-                return true;
-        }
-        });
-}
-
     private void setDropdownListBedrooms() {
         array_adapter = new ArrayAdapter<>(getApplicationContext(),R.layout.item_dropdown_list,property_arr);
         mauctv_property.setAdapter(array_adapter);
@@ -269,6 +421,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         mauctv_bedroom.setThreshold(1);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void disableTouchFocus() {
         tiete_date_time.setOnTouchListener((view, motionEvent) -> {
             int inType = tiete_date_time.getInputType();
@@ -306,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         bedrooms_arr.add("Studio");
         for(int i = 1; i <= 20; i++){
             if(i < 10){
-                bedrooms_arr.add("0"+String.valueOf(i));
+                bedrooms_arr.add("0"+ i);
             }
             else{
                 bedrooms_arr.add(String.valueOf(i));
@@ -319,6 +472,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         tiete_note = findViewById(R.id.edt_note);
         tiete_name = findViewById(R.id.edt_name);
         m_btn_submit = findViewById(R.id.mbtn_submit);
+        rg_furniture = findViewById(R.id.radio_group);
     }
 
 }

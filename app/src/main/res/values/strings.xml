@@ -7,7 +7,7 @@
     <string name="shr_hint_property_type">*Property type</string>
     <string name="shr_hint_bedrooms">*Bedrooms</string>
     <string name="shr_hint_date_time">*Date &amp; time</string>
-    <string name="shr_hint_monthly_price">*Price</string>
+    <string name="shr_hint_monthly_price">*Monthly Price</string>
     <string name="shr_hint_furniture_type">Furniture</string>
     <string name="shr_hint_note">Note</string>
     <string name="shr_hint_name">*Name of reporter</string>
