@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358414242340",
+    "project_id": "mobile-logbook-e9b41",
+    "storage_bucket": "mobile-logbook-e9b41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358414242340:android:6cff6c820fbc448c4e7eb1",
+        "android_client_info": {
+          "package_name": "com.example.mobilelogbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358414242340-39i85g977jpdf3uv6d1lbtkrhjsvcnf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4AM5xbD0LTym9YJ1BhkSS1GfA8buLMb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358414242340-39i85g977jpdf3uv6d1lbtkrhjsvcnf6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

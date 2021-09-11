@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Mobile Logbook</string>
+    <string name="app_name_rentalz"> RentalZ</string>
+    <string name="app_subtitle">Apartment Rent Platform</string>
+
+    <!-- Create Form-->
+    <string name="shr_hint_property_type">*Property type</string>
+    <string name="shr_hint_bedrooms">*Bedrooms</string>
+    <string name="shr_hint_date_time">*Date &amp; time</string>
+    <string name="shr_hint_monthly_price">*Price</string>
+    <string name="shr_hint_furniture_type">Furniture</string>
+    <string name="shr_hint_note">Note</string>
+    <string name="shr_hint_name">*Name of reporter</string>
+
+    <!-- Radio group -Furniture -->
+    <string name="rb_furnished">Furnished</string>
+    <string name="rb_unfurnished">Unfurnished</string>
+    <string name="rb_part_furnished">Part-furnished</string>
+
+    <!-- Button -->
+    <string name="m_btn_submit">Submit</string>
+
+    <!-- Validation Information before Submit-->
+    <string name="validate_information_error">You need fill out this fields.</string>
+    <string name="validate_empty_fields">Empty fields!!! You need to fill out the required fields.</string>
+
+    <!-- Material Alert Dialog-->
+    <string name="message_alert_dialog_txt">Are you sure you want submit these information?</string>
+    <string name="positive_button">Yes</string>
+    <string name="negative_button">Cancel</string>
+    <string name="successful_submit_toast_txt">Your information submitted successful</string>
+</resources>
