@@ -131,6 +131,7 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
                         android:fontFamily="@font/roboto_black"
                         android:textColor="@color/black"
                         android:textSize="15sp" />

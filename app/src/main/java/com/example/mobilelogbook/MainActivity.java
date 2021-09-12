@@ -1,5 +1,6 @@
 package com.example.mobilelogbook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,12 +15,14 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.radiobutton.MaterialRadioButton;
@@ -143,12 +146,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 rentalInfo.put("note",note);
                 rentalInfo.put("nameOfReporter",name);
             db.collection("rental").add(rentalInfo).addOnSuccessListener(documentReference -> {
-
+                Toast.makeText(MainActivity.this,getString(R.string.successful_submit_toast_txt),Toast.LENGTH_SHORT).show();
+                dialogInterface.cancel();
+                clearText();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MainActivity.this,getString(R.string.failure_submit_toast_txt),Toast.LENGTH_SHORT).show();
+                    dialogInterface.cancel();
+                }
             });
 
-            Toast.makeText(MainActivity.this,getString(R.string.successful_submit_toast_txt),Toast.LENGTH_SHORT).show();
-            clearText();
-            dialogInterface.cancel();
         });
         builder.setNegativeButton(getString(R.string.negative_button), (dialogInterface, i) -> dialogInterface.cancel());
 
@@ -239,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         @Override
         public void afterTextChanged(Editable editable) {
             TextInputLayout layout = findViewById(R.id.til_date_time);
-            if(editable.length() == 0){
+            if(editable.length() == 1){
                 layout.setErrorEnabled(true);
                 layout.setError(getString(R.string.validate_information_error));
                 layout.requestFocus();
@@ -321,16 +329,18 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @SuppressLint("ClickableViewAccessibility")
     private void dateTimePicker() {
-        tiete_date_time.setOnTouchListener((view, motionEvent) -> {
-            Calendar calendar = Calendar.getInstance();
-            date = calendar.get(Calendar.DAY_OF_MONTH);
-            month = calendar.get(Calendar.MONTH);
-            year = calendar.get(Calendar.YEAR);
-            DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, MainActivity.this,year, month,date);
-            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            datePickerDialog.show();
-            return true;
-    });
+        tiete_date_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                date = calendar.get(Calendar.DAY_OF_MONTH);
+                month = calendar.get(Calendar.MONTH);
+                year = calendar.get(Calendar.YEAR);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, MainActivity.this,year, month,date);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+            }
+        });
 }
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -349,22 +359,23 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
         m_hour = i;
         m_minute = i1;
-        String n_min = validateMinute();
 
-        tiete_date_time.setText(m_year+"-" + validateMonth(String.valueOf(m_month)) +"-"+m_date+ " " + m_hour + ":" +n_min);
+
+        tiete_date_time.setText(m_year+"-" + validateMonth() +"-"+m_date+ " " + m_hour + ":" +validateMin());
     }
 
-    private String validateMinute() {
-        String v_min;
+    private String validateMin(){
+        String n_min;
         if(m_minute < 10){
-            v_min= "0"+ m_minute;
+            n_min= "0"+ m_minute;
         }else{
-            v_min = String.valueOf(m_minute);
+            n_min = String.valueOf(m_minute);
         }
-        return v_min;
+        return n_min;
     }
 
-    private String validateMonth(String m) {
+
+    private String validateMonth() {
         String v_month;
         switch (m_month){
             case 1:

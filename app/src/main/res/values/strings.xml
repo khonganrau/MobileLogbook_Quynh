@@ -29,4 +29,5 @@
     <string name="positive_button">Yes</string>
     <string name="negative_button">Cancel</string>
     <string name="successful_submit_toast_txt">Your information submitted successful</string>
+    <string name="failure_submit_toast_txt"> Your information submitted fail</string>
 </resources>
