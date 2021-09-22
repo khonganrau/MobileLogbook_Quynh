@@ -7,10 +7,10 @@
     <string name="shr_hint_property_type">*Property type</string>
     <string name="shr_hint_bedrooms">*Bedrooms</string>
     <string name="shr_hint_date_time">*Date &amp; time</string>
-    <string name="shr_hint_monthly_price">*Monthly Price</string>
+    <string name="shr_hint_monthly_price">*Price</string>
     <string name="shr_hint_furniture_type">Furniture</string>
     <string name="shr_hint_note">Note</string>
-    <string name="shr_hint_name">*Name of reporter</string>
+    <string name="shr_hint_name">*Reporters Name</string>
 
     <!-- Radio group -Furniture -->
     <string name="rb_furnished">Furnished</string>
@@ -26,8 +26,10 @@
 
     <!-- Material Alert Dialog-->
     <string name="message_alert_dialog_txt">Are you sure you want submit these information?</string>
+    <string name="title_alert_dialoc_txt">Confirm Information</string>
     <string name="positive_button">Yes</string>
     <string name="negative_button">Cancel</string>
     <string name="successful_submit_toast_txt">Your information submitted successful</string>
     <string name="failure_submit_toast_txt"> Your information submitted fail</string>
+    <string name="txt_info">The information that entered form keyboard</string>
 </resources>

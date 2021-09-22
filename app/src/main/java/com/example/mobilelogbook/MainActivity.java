@@ -1,13 +1,12 @@
 package com.example.mobilelogbook;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.text.Editable;
@@ -15,14 +14,14 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.radiobutton.MaterialRadioButton;
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private MaterialRadioButton m_radio_btn_unfurnished;
     private MaterialRadioButton m_radio_btn_part_furnished;
     private RadioGroup rg_furniture;
+    private static final String TAG = "MainActivity";
 
     int date, month, year, hour, minute;
     int m_date, m_month, m_year, m_hour, m_minute;
@@ -128,10 +128,18 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void submitInfo(String property, String bedroom, String dateTime, String furniture, String price, String note, String name) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this,R.style.Theme_MaterialComponents_Light_Dialog_Alert);
-        builder.setMessage(getString(R.string.message_alert_dialog_txt));
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.activity_custom_dialog, null);
+        TextView info = view.findViewById(R.id.info_txt);
+        info.setText("1. Property Type: "+property+"\n2. Bedroom: "+bedroom+"\n3. Date and time: "+dateTime+"\n4. Monthly Price: "+price+"\n5. Furniture: "+furniture
+                +"\n6. Note: "+note+"\n7. Name of Reporter: "+name);
+        builder.setView(view);
         builder.setCancelable(true);
+
 
         builder.setPositiveButton(getString(R.string.positive_button), (dialogInterface, i) -> {
 //                Firebase connect
@@ -146,15 +154,15 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 rentalInfo.put("note",note);
                 rentalInfo.put("nameOfReporter",name);
             db.collection("rental").add(rentalInfo).addOnSuccessListener(documentReference -> {
-                Toast.makeText(MainActivity.this,getString(R.string.successful_submit_toast_txt),Toast.LENGTH_SHORT).show();
                 dialogInterface.cancel();
-                clearText();
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(MainActivity.this,getString(R.string.failure_submit_toast_txt),Toast.LENGTH_SHORT).show();
-                    dialogInterface.cancel();
-                }
+//                clearText();
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                Toast.makeText(MainActivity.this,getString(R.string.successful_submit_toast_txt),Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                Toast.makeText(MainActivity.this,getString(R.string.failure_submit_toast_txt),Toast.LENGTH_SHORT).show();
+                dialogInterface.cancel();
             });
 
         });
@@ -164,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         alertDialog.show();
     }
 
+    //clear Text
     private void clearText() {
         mauctv_property.setText("");
         mauctv_bedroom.setText("");
@@ -175,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     }
 
+    //textChangeWatcher
     private void textChangeWatcher() {
         mauctv_property.addTextChangedListener(tcw_property);
         mauctv_bedroom.addTextChangedListener(tcw_bedroom);
@@ -329,17 +339,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @SuppressLint("ClickableViewAccessibility")
     private void dateTimePicker() {
-        tiete_date_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                date = calendar.get(Calendar.DAY_OF_MONTH);
-                month = calendar.get(Calendar.MONTH);
-                year = calendar.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, MainActivity.this,year, month,date);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-                datePickerDialog.show();
-            }
+        tiete_date_time.setOnClickListener(view -> {
+            Calendar calendar = Calendar.getInstance();
+            date = calendar.get(Calendar.DAY_OF_MONTH);
+            month = calendar.get(Calendar.MONTH);
+            year = calendar.get(Calendar.YEAR);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, MainActivity.this,year, month,date);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
         });
 }
     @Override
@@ -469,13 +476,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         bedrooms_arr = new ArrayList<>();
         bedrooms_arr.add("Studio");
         for(int i = 1; i <= 20; i++){
-            if(i < 10){
-                bedrooms_arr.add("0"+ i);
-            }
-            else{
                 bedrooms_arr.add(String.valueOf(i));
             }
-        }
         m_radio_btn_furnished = findViewById(R.id.radio_btn_furnished);
         m_radio_btn_unfurnished = findViewById(R.id.radio_btn_unfurnished);
         m_radio_btn_part_furnished = findViewById(R.id.radio_btn_part);
