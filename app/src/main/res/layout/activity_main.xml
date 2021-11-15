@@ -8,16 +8,16 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/layout_textApp"
+
+    <LinearLayout
+        android:id="@+id/layout_titleApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/custom_app_form_layout"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/app_name"
@@ -32,140 +32,137 @@
             android:id="@+id/app_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/app_name"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_black"
             android:text="@string/app_subtitle"
             android:textColor="@color/black" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/layout_createForm"
+    <ScrollView
+        android:id="@+id/sc_entryForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_textApp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/custom_app_form_layout">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_property"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:focusableInTouchMode="false"
-            android:hint="@string/shr_hint_property_type"
-            android:textColorHint="@color/black"
-            app:boxStrokeColor="@color/black">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/mactxt_property"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:cursorVisible="false"
-                android:focusableInTouchMode="false"
-                android:fontFamily="@font/roboto_black"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+        android:layout_below="@+id/layout_titleApp"
+        android:layout_marginTop="5dp"
+        android:verticalScrollbarPosition="right">
 
         <LinearLayout
-            android:id="@+id/layout_bedroom_dateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/til_property"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="5">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_bedrooms"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="2.5"
-                android:focusableInTouchMode="true"
-                android:hint="@string/shr_hint_bedrooms"
-                android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="2dp">
-
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/mactxt_bedroom"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:cursorVisible="false"
-                    android:fontFamily="@font/roboto_black"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_date_time"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:focusableInTouchMode="true"
-                android:hint="@string/shr_hint_date_time"
-                android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="2dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_date_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:cursorVisible="false"
-                    android:focusableInTouchMode="false"
-                    android:fontFamily="@font/roboto_black"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_monthlyPrice_furniture_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_bedroom_dateTime"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="6">
+            android:id="@+id/lo_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_price_note"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:id="@+id/layout_createForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="3"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/custom_app_form_layout"
+                android:orientation="vertical">
 
+                <!-- Property type-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_property"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/shr_hint_property_type"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/mactxt_property"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/roboto_black"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Bedroom & Date time fields-->
+                <LinearLayout
+                    android:id="@+id/layout_bedroom_dateTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <!--Bedroom fields-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_bedrooms"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="2.5"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/shr_hint_bedrooms"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/mactxt_bedroom"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:cursorVisible="false"
+                            android:fontFamily="@font/roboto_black"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--Date and time fields-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_date_time"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/shr_hint_date_time"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_date_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:cursorVisible="false"
+                            android:focusableInTouchMode="false"
+                            android:fontFamily="@font/roboto_black"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--Price per month -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_monthlyPrice"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:hint="@string/shr_hint_monthly_price"
                     android:paddingEnd="5dp"
@@ -187,40 +184,14 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:hint="@string/shr_hint_name"
-                    android:textColorHint="@color/black"
-                    app:boxStrokeWidth="2dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                         />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_furniture"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3">
-
+                <!--Furnished type Radio Group-->
                 <TextView
                     android:id="@+id/txt_furniture"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/roboto_black"
                     android:paddingStart="17dp"
                     android:text="@string/shr_hint_furniture_type"
@@ -231,88 +202,137 @@
                     android:id="@+id/radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_furniture"
-                    android:paddingStart="16dp"
-                    tools:ignore="RtlSymmetry">
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
+                    <!-- Furnished rbtn-->
+                    <RadioButton
                         android:id="@+id/radio_btn_furnished"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/black"
-                        android:fontFamily="@font/roboto_medium"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_selecter"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="5dp"
                         android:text="@string/rb_furnished"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textColor="@drawable/rbtn_textcolor_selector" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
+                    <!-- unfurnished rbtn-->
+                    <RadioButton
                         android:id="@+id/radio_btn_unfurnished"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/black"
-                        android:fontFamily="@font/roboto_medium"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_selecter"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="5dp"
                         android:text="@string/rb_unfurnished"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textColor="@drawable/rbtn_textcolor_selector" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
+                    <!-- Part-furnished rbtn-->
+                    <RadioButton
                         android:id="@+id/radio_btn_part"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/black"
-                        android:fontFamily="@font/roboto_medium"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_selecter"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="5dp"
                         android:text="@string/rb_part_furnished"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
+                        android:textColor="@drawable/rbtn_textcolor_selector" />
 
                 </RadioGroup>
 
-            </RelativeLayout>
+                <!-- Name of reporter fields-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/shr_hint_name"
+                    android:paddingEnd="5dp"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp"
+                    app:suffixTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/roboto_black"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!-- Notes fields-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_note"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:hint="@string/shr_hint_note"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_black"
+                        android:inputType="textMultiLine"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ProgressBar
+                    android:id="@+id/simpleProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mbtn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_app_form_layout"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/m_btn_submit"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:backgroundTint="@color/white_500" />
 
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_note"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_below="@+id/layout_monthlyPrice_furniture_note"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:hint="@string/shr_hint_note"
-            android:textColorHint="@color/black"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="2dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_note"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/roboto_black"
-                android:inputType="textMultiLine"
-                android:textSize="15sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </RelativeLayout>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mbtn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_createForm"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/custom_app_form_layout"
-        android:fontFamily="@font/roboto_black"
-        android:text="@string/m_btn_submit"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:backgroundTint="@color/white_500" />
+    </ScrollView>
+
+    <!-- Submit button-->
+
+
 
 
 </RelativeLayout>

@@ -1,7 +1,5 @@
 package com.example.mobilelogbook;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -18,13 +16,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -33,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -49,11 +52,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private TextInputEditText tiete_price;
     private TextInputEditText tiete_note;
     private TextInputEditText tiete_name;
-    private MaterialRadioButton m_radio_btn_furnished;
-    private MaterialRadioButton m_radio_btn_unfurnished;
-    private MaterialRadioButton m_radio_btn_part_furnished;
+    private RadioButton m_radio_btn_furnished;
+    private RadioButton m_radio_btn_unfurnished;
+    private RadioButton m_radio_btn_part_furnished;
     private RadioGroup rg_furniture;
-    private static final String TAG = "MainActivity";
 
     int date, month, year, hour, minute;
     int m_date, m_month, m_year, m_hour, m_minute;
@@ -470,14 +472,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         mauctv_property = findViewById(R.id.mactxt_property);
         mauctv_bedroom = findViewById(R.id.mactxt_bedroom);
         tiete_date_time = findViewById(R.id.edt_date_time);
-        String[] arr_property = {"Apartment","House","Flat","Bungalow"};
-        property_arr = new ArrayList<>(Arrays.asList(arr_property));
-        mauctv_bedroom = findViewById(R.id.mactxt_bedroom);
-        bedrooms_arr = new ArrayList<>();
-        bedrooms_arr.add("Studio");
-        for(int i = 1; i <= 20; i++){
-                bedrooms_arr.add(String.valueOf(i));
-            }
         m_radio_btn_furnished = findViewById(R.id.radio_btn_furnished);
         m_radio_btn_unfurnished = findViewById(R.id.radio_btn_unfurnished);
         m_radio_btn_part_furnished = findViewById(R.id.radio_btn_part);
@@ -486,6 +480,21 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         tiete_name = findViewById(R.id.edt_name);
         m_btn_submit = findViewById(R.id.mbtn_submit);
         rg_furniture = findViewById(R.id.radio_group);
+
+        //Property arrayList
+        String[] arr_property = getResources().getStringArray(R.array.property);
+        property_arr = new ArrayList<>(Arrays.asList(arr_property));
+        mauctv_bedroom = findViewById(R.id.mactxt_bedroom);
+
+        // Bebrooms arrayList
+        bedrooms_arr = new ArrayList<>();
+        String bedrooms [] = getResources().getStringArray(R.array.bedrooms);
+        bedrooms_arr.addAll(Arrays.asList(bedrooms));
+        for(int i = 1; i <= 100; i++){
+                bedrooms_arr.add(String.valueOf(i));
+            }
+
+
     }
 
 }

@@ -7,9 +7,9 @@
     <string name="shr_hint_property_type">*Property type</string>
     <string name="shr_hint_bedrooms">*Bedrooms</string>
     <string name="shr_hint_date_time">*Date &amp; time</string>
-    <string name="shr_hint_monthly_price">*Price</string>
+    <string name="shr_hint_monthly_price">*Monthly price</string>
     <string name="shr_hint_furniture_type">Furniture</string>
-    <string name="shr_hint_note">Note</string>
+    <string name="shr_hint_note">Notes</string>
     <string name="shr_hint_name">*Reporters Name</string>
 
     <!-- Radio group -Furniture -->
@@ -32,4 +32,18 @@
     <string name="successful_submit_toast_txt">Your information submitted successful</string>
     <string name="failure_submit_toast_txt"> Your information submitted fail</string>
     <string name="txt_info">The information that entered form keyboard</string>
+
+    <!-- property array-->
+    <string-array name="property">
+        <item>House</item>
+        <item>Apartment</item>
+        <item>Flat</item>
+        <item>Bungalow</item>
+    </string-array>
+
+    <!-- bedrooms array-->
+    <string-array name="bedrooms">
+        <item>Studio</item>
+    </string-array>
+
 </resources>
